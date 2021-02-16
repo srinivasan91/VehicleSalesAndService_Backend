@@ -1,27 +1,53 @@
 package com.capstone.vehicle_sales_and_service.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Employee {
 	
 	@Id
+	@GeneratedValue
 	private Long id;
 	
+	@Size(min=2, message="Name should have atleast two characters")
 	private String firstname;
+	
+	@Size(min=2, message="Name should have atleast two characters")
 	private String lastname;
+	
+	@NotEmpty
+	@Email
+	@Size(min=5,max=255)
+	@Column(unique = true)
 	private String email;
+	
+	@Pattern(regexp="(^$|[0-9]{10})")
 	private String phone;
 	
 	public Employee() { }
 
-	public Employee(String firstname, String lastname, String email, String phone) {
+	public Employee(Long id, String firstname, String lastname, String email, String phone) {
 		super();
+		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.phone = phone;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFirstname() {
@@ -110,8 +136,5 @@ public class Employee {
 		return "Employee [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", email=" + email
 				+ ", phone=" + phone + "]";
 	}
-	
-	
-	
 
 }
