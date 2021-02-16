@@ -8,4 +8,6 @@ import com.capstone.vehicle_sales_and_service.model.Customer;
 @Repository
 public interface CustomerDAO extends JpaRepository<Customer, Long> {
 
+	Customer findByEmail(String username);
+
 }
