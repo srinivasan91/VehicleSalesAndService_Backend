@@ -10,9 +10,13 @@ import com.capstone.vehicle_sales_and_service.model.Customer;
 public class CustomerService {
 	
 	@Autowired
+	EmailService emailService;
+	
+	@Autowired
 	private CustomerDAO customerDAO;
 	
 	public Customer addCustomer(Customer customer) {
+		emailService.sendMail(customer.getEmail(), "Succcess - Congrats..!" , "You are Added Successfully..!");
 		return customerDAO.save(customer);
 	}
 
