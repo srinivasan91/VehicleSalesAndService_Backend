@@ -1,4 +1,6 @@
 package com.capstone.vehicle_sales_and_service.service;
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,6 +29,11 @@ public class EmailService
      * */
     public void sendMail(String to, String subject, String body) 
     {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo(to);
+//        message.setSubject(subject);
+//        message.setText("<h1 color=blue> Welcome to the Vechicle Sales and Service - capstone </br> </h1>"+ body);
+//        mailSender.send(message);
     	
         MimeMessagePreparator mailMessage = mimeMessage -> {
 
@@ -35,6 +42,7 @@ public class EmailService
             try {
                 message.setFrom(mailUsername);
                 message.addTo(to);
+//                message.setReplyTo(to);
                 message.setSubject(subject);
                 message.setText("<h1 color=blue> Welcome to the Vechicle Sales and Service - capstone </br> </h1>"+ body, true);
             } catch (Exception e) {
